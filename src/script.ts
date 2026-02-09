@@ -1,3 +1,4 @@
+import Estatisticas from "./Estatisticas.js";
 import fetchData from "./fetchData.js";
 import normalizarTransacao from "./normalizarTransacao.js";
 import { formatarDataExtenso } from "./stringToDate.js";
@@ -9,9 +10,37 @@ async function handleData() {
   if (!data) return;
   const transacoes = data.map(normalizarTransacao);
   displayTable(transacoes);
+  preencherEstatisticas(transacoes);
 }
 
 handleData();
+
+function preencherEstatisticas(transacoes: Transacao[]): void {
+  const data = new Estatisticas(transacoes);
+  const totalElement = document.querySelector<HTMLElement>("#total");
+  if (totalElement) {
+    totalElement.innerText =
+      "Total:" +
+      data.total.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+  }
+  const pagamentoElement = document.getElementById("pagamento");
+  if (pagamentoElement) {
+    Object.keys(data.pagamento).forEach((chave) => {
+      pagamentoElement.innerHTML += `<p>${chave}:${data.pagamento[chave]}</p>`;
+    });
+    console.log;
+  }
+
+  const StatusElement = document.getElementById("status");
+  if (StatusElement) {
+    Object.keys(data.status).forEach((chave) => {
+      StatusElement.innerHTML += `<p>${chave}:${data.status[chave]}</p>`;
+    });
+  }
+}
 
 function displayTable(transacoes: Transacao[]): void {
   const tabela = document.querySelector("#transacoes tbody");
