@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    // File Layout
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "target": "esnext",
+    "strict": true
+  }
+}
