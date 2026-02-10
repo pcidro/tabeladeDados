@@ -40,6 +40,11 @@ function preencherEstatisticas(transacoes: Transacao[]): void {
       StatusElement.innerHTML += `<p>${chave}:${data.status[chave]}</p>`;
     });
   }
+
+  const diaElement = document.querySelector<HTMLElement>("#dia span");
+  if (diaElement) {
+    diaElement.innerText = `${data.melhorDia[0]}`;
+  }
 }
 
 function displayTable(transacoes: Transacao[]): void {

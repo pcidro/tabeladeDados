@@ -35,6 +35,10 @@ function preencherEstatisticas(transacoes) {
             StatusElement.innerHTML += `<p>${chave}:${data.status[chave]}</p>`;
         });
     }
+    const diaElement = document.querySelector("#dia span");
+    if (diaElement) {
+        diaElement.innerText = `${data.melhorDia[0]}`;
+    }
 }
 function displayTable(transacoes) {
     const tabela = document.querySelector("#transacoes tbody");
